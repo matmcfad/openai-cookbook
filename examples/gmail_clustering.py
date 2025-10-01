@@ -33,9 +33,8 @@ import matplotlib.pyplot as plt
 
 from openai import OpenAI
 
-# Add the utils directory to the path
-sys.path.append(str(Path(__file__).parent / "utils"))
-from embeddings_utils import get_embeddings
+# Don't import embeddings_utils at module level since it requires API key
+# We'll import it only when needed in the functions
 
 # Gmail API imports
 GMAIL_AVAILABLE = True
@@ -178,6 +177,10 @@ def fetch_emails(service, max_results=500):
 def generate_embeddings(df, model="text-embedding-3-small"):
     """Generate embeddings for email texts."""
     print("Generating embeddings using OpenAI API...")
+    
+    # Import here to avoid requiring API key at module load time
+    sys.path.append(str(Path(__file__).parent / "utils"))
+    from embeddings_utils import get_embeddings
     
     texts = df['combined'].tolist()
     
