@@ -140,3 +140,9 @@ examples/fine-tuned_qa/local_cache/*
 
 # PyCharm files
 .idea/
+
+# Gmail clustering script outputs
+examples/test_email_clusters.*
+examples/email_clusters.*
+examples/token.pickle
+examples/credentials.json
